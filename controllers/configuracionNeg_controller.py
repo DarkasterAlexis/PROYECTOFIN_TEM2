@@ -31,6 +31,6 @@ def edit(id):
 
 @configuracion_bp.route('/delete/<int:id>', methods=['GET','POST'])
 def delete(id):
-    config = ConfiguracionNegocio.get_byy_id(id)
+    config = ConfiguracionNegocio.get_by_id(id)
     config.delete()
     return redirect(url_for('configuracion.index'))

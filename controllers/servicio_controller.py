@@ -1,51 +1,50 @@
-from flask import Blueprint, request, jsonify
-from database import db
-from models import Servicio
+from flask import Blueprint, request,redirect,url_for
+from models.servicio_model import Servicio
+from views import servicio_view
 
-servicios_bp = Blueprint('servicios_bp', __name__)
+servicios_bp = Blueprint('servicio', __name__,url_prefix="/servicios")
 
-@servicios_bp.route('/servicios', methods=['POST'])
-def crear_servicio():
-    data = request.json
-    servicio = Servicio(
-        nombre_servicio=data['nombre_servicio'],
-        descripcion=data['descripcion'],
-        duracion_default=data['duracion_default'],
-        precio=data.get('precio')
-    )
-    db.session.add(servicio)
-    db.session.commit()
-    return jsonify({'message': 'Servicio creado', 'servicio_id': servicio.servicio_id}), 201
+@servicios_bp.route('/create', methods=['GET','POST'])
+def create():
+    if request.method == 'POST':
+        nombre_servicio=request.form['nombre_servicio']
+        descripcion=request.form['descripcion']
+        duraciondefault=request.form['duraciondefault']
+        precio=request.form['precio']
+        servicio = Servicio(nombre_servicio,descripcion,duraciondefault,precio)
+        servicio.save()
+        return redirect(url_for('servicio.index'))
+    return servicio_view.create()
 
-@servicios_bp.route('/servicios', methods=['GET'])
-def listar_servicios():
-    servicios = Servicio.query.all()
-    resultado = [
-        {
-            'servicio_id': s.servicio_id,
-            'nombre_servicio': s.nombre_servicio,
-            'descripcion': s.descripcion,
-            'duracion_default': s.duracion_default,
-            'precio': str(s.precio) if s.precio else None
-        }
-        for s in servicios
-    ]
-    return jsonify(resultado)
+# @servicios_bp.route('/servicios', methods=['GET'])
+# def listar_servicios():
+#     servicios = servicio_model.query.all()
+#     resultado = [
+#         {
+#             'servicio_id': s.servicio_id,
+#             'nombre_servicio': s.nombre_servicio,
+#             'descripcion': s.descripcion,
+#             'duracion_default': s.duracion_default,
+#             'precio': str(s.precio) if s.precio else None
+#         }
+#         for s in servicios
+#     ]
+#     return jsonify(resultado)
 
-@servicios_bp.route('/servicios/<int:servicio_id>', methods=['PUT'])
-def actualizar_servicio(servicio_id):
-    servicio = Servicio.query.get_or_404(servicio_id)
-    data = request.json
-    servicio.nombre_servicio = data.get('nombre_servicio', servicio.nombre_servicio)
-    servicio.descripcion = data.get('descripcion', servicio.descripcion)
-    servicio.duracion_default = data.get('duracion_default', servicio.duracion_default)
-    servicio.precio = data.get('precio', servicio.precio)
-    db.session.commit()
-    return jsonify({'message': 'Servicio actualizado'})
+@servicios_bp.route('/edit/<int:id>', methods=['GET','POST'])
+def edit(id):
+    servicio = Servicio.get_by_id(id)
+    if request.method == 'POST':
+        nombre_servicio=request.form['nombre_servicio']
+        descripcion=request.form['descripcion']
+        duraciondefault=request.form['duraciondefault']
+        precio=request.form['precio']
+        servicio.update(nombre_servicio=nombre_servicio,descripcion=descripcion,duraciondefault=duraciondefault,precio=precio)
+        return redirect(url_for('servicio.index'))
+    return servicio_view.create()
 
-@servicios_bp.route('/servicios/<int:servicio_id>', methods=['DELETE'])
-def eliminar_servicio(servicio_id):
-    servicio = Servicio.query.get_or_404(servicio_id)
-    db.session.delete(servicio)
-    db.session.commit()
-    return jsonify({'message': 'Servicio eliminado'})
+@servicios_bp.route('/delete/<int:id>', methods=['GET','POST'])
+def delete(id):
+    servicio = Servicio.get_by_id(id)
+    servicio.delete(servicio)
+    return redirect(url_for('servicio.index'))

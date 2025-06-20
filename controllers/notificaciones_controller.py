@@ -1,35 +1,40 @@
-from flask import Blueprint, request, jsonify
-from database import db
-from models import Notificacion
+from flask import Blueprint, request, redirect,url_for
+from models.notificaciones_model import Notificacion
+from views import notificaciones_view
 
-notificaciones_bp = Blueprint('notificaciones_bp', __name__)
+notificaciones_bp = Blueprint('notificacion', __name__,url_prefix="/notificaciones")
 
-@notificaciones_bp.route('/notificaciones', methods=['POST'])
-def crear_notificacion():
-    data = request.json
-    notificacion = Notificacion(
-        reserva_id=data['reserva_id'],
-        tipo_notificacion=data['tipo_notificacion'],
-        mensaje=data['mensaje'],
-        estado_envio=data['estado_envio']
-    )
-    db.session.add(notificacion)
-    db.session.commit()
-    return jsonify({'message': 'Notificación creada', 'notificacion_id': notificacion.notificacion_id}), 201
+@notificaciones_bp.route("/")
+def index():
+    servicios = Notificacion.get_all()
+    return notificaciones_view.list(servicios)
 
-@notificaciones_bp.route('/notificaciones/<int:notificacion_id>', methods=['PUT'])
-def actualizar_notificacion(notificacion_id):
-    notificacion = Notificacion.query.get_or_404(notificacion_id)
-    data = request.json
-    notificacion.tipo_notificacion = data.get('tipo_notificacion', notificacion.tipo_notificacion)
-    notificacion.mensaje = data.get('mensaje', notificacion.mensaje)
-    notificacion.estado_envio = data.get('estado_envio', notificacion.estado_envio)
-    db.session.commit()
-    return jsonify({'message': 'Notificación actualizada'})
+@notificaciones_bp.route('/create', methods=['GET','POST'])
+def create():
+    if request.method == 'POST':
+        tiponotificacion=request.form['tipo_notificacion']
+        mensaje=request.form['mensaje']
+        fechaenvio = request.form['fechaenvio']
+        estadoenvio=request.form['estadoenvio']
+        notifi = Notificacion(tiponotificacion,mensaje,fechaenvio,estadoenvio)
+        notifi.save()
+        return redirect(url_for('notificacion.index'))
+    return notificaciones_view.create()
 
-@notificaciones_bp.route('/notificaciones/<int:notificacion_id>', methods=['DELETE'])
-def eliminar_notificacion(notificacion_id):
-    notificacion = Notificacion.query.get_or_404(notificacion_id)
-    db.session.delete(notificacion)
-    db.session.commit()
-    return jsonify({'message': 'Notificación eliminada'})
+@notificaciones_bp.route('/edit/<int:id>', methods=['GET','POST'])
+def edit(id):
+    notifi = Notificacion.get_by_id(id)
+    if request.method == 'POST':
+        tiponotificacion=request.form['tipo_notificacion']
+        mensaje=request.form['mensaje']
+        fechaenvio = request.form['fechaenvio']
+        estadoenvio=request.form['estadoenvio']
+        notifi.update(tiponotificacion=tiponotificacion,mensaje=mensaje,fechaenvio=fechaenvio,estadoenvio=estadoenvio)
+        return redirect(url_for('notificacion.index'))
+    return notificaciones_view.edit()
+
+@notificaciones_bp.route('/delete/<int:id>', methods=['GET','POST'])
+def delete(id):
+    notifi = Notificacion.get_by_id(id)
+    notifi.delete()
+    return redirect(url_for('notificacion.index'))

@@ -1,37 +1,40 @@
-from flask import Blueprint, request, jsonify
-from database import db
-from models import HistorialReserva
+from flask import Blueprint, request, redirect, url_for
+from models.historialcambres_model import HistorialCambioReserva
+from views import historialcambres_view
 
-historial_bp = Blueprint('historial_bp', __name__)
+historial_bp = Blueprint('historial', __name__,url_prefix="/historial")
 
-@historial_bp.route('/historial', methods=['POST'])
-def crear_historial():
-    data = request.json
-    historial = HistorialReserva(
-        reserva_id=data['reserva_id'],
-        campo_modificado=data['campo_modificado'],
-        valor_antiguo=data.get('valor_antiguo'),
-        valor_nuevo=data.get('valor_nuevo'),
-        usuario_modificador_id=data['usuario_modificador_id']
-    )
-    db.session.add(historial)
-    db.session.commit()
-    return jsonify({'message': 'Historial registrado', 'historial_id': historial.historial_id}), 201
+@historial_bp.route("/")
+def index():
+    historia = HistorialCambioReserva.get_all()
+    return historialcambres_view.list(historia)
 
-@historial_bp.route('/historial/<int:historial_id>', methods=['PUT'])
-def actualizar_historial(historial_id):
-    historial = HistorialReserva.query.get_or_404(historial_id)
-    data = request.json
-    historial.campo_modificado = data.get('campo_modificado', historial.campo_modificado)
-    historial.valor_antiguo = data.get('valor_antiguo', historial.valor_antiguo)
-    historial.valor_nuevo = data.get('valor_nuevo', historial.valor_nuevo)
-    historial.usuario_modificador_id = data.get('usuario_modificador_id', historial.usuario_modificador_id)
-    db.session.commit()
-    return jsonify({'message': 'Historial de reserva actualizado'})
+@historial_bp.route('/create', methods=['GET','POST'])
+def create():
+    if request.method == 'POST':
+        campomodificado=request.form['campomodificado']
+        valorantiguo=request.form['valorantiguo']
+        valornuevo=request.form['valornuevo']
+        fechacambio=request.form['fechacambio']
+        historial = HistorialCambioReserva(campomodificado,valorantiguo,valornuevo,fechacambio)
+        historial.save()
+        return redirect(url_for('historial.index'))
+    return historialcambres_view.create()
 
-@historial_bp.route('/historial/<int:historial_id>', methods=['DELETE'])
-def eliminar_historial(historial_id):
-    historial = HistorialReserva.query.get_or_404(historial_id)
-    db.session.delete(historial)
-    db.session.commit()
-    return jsonify({'message': 'Historial de reserva eliminado'})
+@historial_bp.route('/edit/<int:id>', methods=['GET','POST'])
+def edit(id):
+    historial = HistorialCambioReserva.get_by_id(id)
+    if request.method == 'POST':
+        campomodificado=request.form['campomodificado']
+        valorantiguo=request.form['valorantiguo']
+        valornuevo=request.form['valornuevo']
+        fechacambio=request.form['fechacambio']
+        historial.update(campomodificado,valorantiguo,valornuevo,fechacambio)
+        return redirect(url_for('historial.index'))
+    return historialcambres_view.edit()
+
+@historial_bp.route('/delete/<int:id>', methods=['GET','POST'])
+def delete(id):
+    historial = HistorialCambioReserva.get_by_id(id)
+    historial.delete()
+    return redirect(url_for('historial.index'))

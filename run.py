@@ -15,9 +15,15 @@ app.register_blueprint(historialcambres_controller.historial_bp)
 app.register_blueprint(notificaciones_controller.notificaciones_bp)
 app.register_blueprint(servicio_controller.servicios_bp)
 
+@app.context_processor
+def inject_active_path():
+    def is_active(path):
+        return 'active' if request.path == path else ''
+    return (dict(is_active = is_active))
+
 @app.route("/")
 def home():
-    return "<h1>Bienvenido</h1>"
+    return "<h1>Bienvenido al sistema de pedidos</h1>"
 
 if __name__ == "__main__":
     with app.app_context():
