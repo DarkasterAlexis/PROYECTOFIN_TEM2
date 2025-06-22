@@ -7,26 +7,30 @@
 <table class="table table-dark table-hover" >
     <tr>
         <td>ID</td>
+        <td>ID RESERVA</td>
         <td>CAMPO MODIFICADO</td>
         <td>VALOR ANTIGUO</td>
         <td>VALOR NUEVO</td>
         <td>FECHA DEL CAMBIO</td>
+        <td>ID DE USUARIO MODIFICADOR</td>
         <td>ELIMINAR</td>
     </tr>
     {%for hist in historial%}
     <tr>
         <td>hist.id</td>
+        <td>hist.reser_id</td>
         <td>hist.campomodificado</td>
         <td>hist.valorantiguo</td>
         <td>hist.valornuevo</td>
         <td>hist.fechacambio</td>
+        <td>hist.usuariomodifi_id</td>
         <td>
             <a href="{{url_for('historial.delete')}}" class="btn btn-danger">Eliminar</a>
         </td>
     </tr>
     {%else%}
     <tr>
-        <td colspan="6px">No se han registrado nada en el historial de actividades</td>
+        <td colspan="8px">No se han registrado nada en el historial de actividades</td>
     </tr>
     {%endfor%}
 </table>
