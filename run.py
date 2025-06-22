@@ -1,5 +1,5 @@
 from flask import Flask, request,render_template,redirect,url_for
-from controllers import configuracionNeg_controller,historialcambres_controller,notificaciones_controller,servicio_controller
+from controllers import configuracionNeg_controller,historialcambres_controller,notificaciones_controller,servicio_controller,HorariosTrabajoPersonal_controller,reservas_controller,personal_controller
 from flask_login import LoginManager,login_required, logout_user, login_user,UserMixin,current_user
 from database import db
 
@@ -14,6 +14,9 @@ app.register_blueprint(configuracionNeg_controller.configuracion_bp)
 app.register_blueprint(historialcambres_controller.historial_bp)
 app.register_blueprint(notificaciones_controller.notificaciones_bp)
 app.register_blueprint(servicio_controller.servicios_bp)
+app.register_blueprint(HorariosTrabajoPersonal_controller.horarios_bp)
+app.register_blueprint(reservas_controller.reserva_bp)
+app.register_blueprint(personal_controller.personal_bp)
 
 @app.context_processor
 def inject_active_path():

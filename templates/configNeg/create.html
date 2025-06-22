@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %} CONFIGURACION | CREATE {% endblock %}
+
+{% block content %}
+
+<div class="container mt-5" style="background-color: #dda43a; padding: 20px;">
+    <h1 class="text-center mb-4">ADICIONAR PARAMETROS</h1>
+    <form action="{{ url_for('configuracion.create') }}" method="POST" class="mx-auto" style="max-width: 600px;">
+        <div class="mb-3">
+            <label for="np" class="form-label">Nombre del Parametro</label>
+            <input type="text" class="form-control" id="np" name="nombreparametro" required>
+        </div>
+        <div class="mb-3">
+            <label for="vp" class="form-label">Valor del Parametro</label>
+            <input type="text" class="form-control" id="vp" name="valorparametro" required>
+        </div>
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary">REGISTRAR PARAMETRO</button>
+        </div>
+    </form>
+</div>
+
+{% endblock %}

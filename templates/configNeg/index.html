@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{%block title%}CONFIGURACION{%endblock%}
+
+{%block content%}
+<h1>CONFIGURACIÓN</h1>
+
+<a href="{{url_for('configuracion.create')}}" class="btn btn-success mb-1">Nuevo parametro</a>
+<table class="table table-dark table-hover" >
+    <tr>
+        <td>ID</td>
+        <td>NOMBRE DEL PARAMETRO</td>
+        <td>VALOR DEL PARAMETRO</td>
+        <td>EDITAR</td>
+        <td>ELIMINAR</td>
+    </tr>
+    {%for config in comfiguraciones%}
+    <tr>
+        <td>config.id</td>
+        <td>config.nombreparametro</td>
+        <td>config.valorparametro</td>
+        <td>
+            <a href="{{url_for('configuracion.edit')}}" class="btn btn-warning">Editar</a>
+        </td>
+        <td>
+            <a href="{{url_for('configuracion.delete')}}" class="btn btn-danger">Eliminar</a>
+        </td>
+    </tr>
+    {%else%}
+    <tr>
+        <td colspan="5px">No se han registrado parametros</td>
+    </tr>
+    {%endfor%}
+</table>
+
+{%endblock%}

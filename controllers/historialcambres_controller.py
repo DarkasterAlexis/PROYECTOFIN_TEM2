@@ -12,11 +12,13 @@ def index():
 @historial_bp.route('/create', methods=['GET','POST'])
 def create():
     if request.method == 'POST':
+        reser_id=request.form['reser_id']
         campomodificado=request.form['campomodificado']
         valorantiguo=request.form['valorantiguo']
         valornuevo=request.form['valornuevo']
         fechacambio=request.form['fechacambio']
-        historial = HistorialCambioReserva(campomodificado,valorantiguo,valornuevo,fechacambio)
+        usuariomodifi_id=request.form['usuariomodifi_id']
+        historial = HistorialCambioReserva(reser_id,campomodificado,valorantiguo,valornuevo,fechacambio)
         historial.save()
         return redirect(url_for('historial.index'))
     return historialcambres_view.create()
