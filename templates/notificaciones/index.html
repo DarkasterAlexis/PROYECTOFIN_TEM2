@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block title %}Notificaciones{% endblock %}
+
+{% block content %}
+<h2>Historial de Notificaciones</h2>
+<table class="table table-dark">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Reserva ID</th>
+            <th>Tipo</th>
+            <th>Mensaje</th>
+            <th>Fecha de Envío</th>
+            <th>Estado</th>
+            <td>ELIMINAR</td>
+        </tr>
+    </thead>
+    <tbody>
+        {% for n in notificaciones %}
+        <tr>
+            <td>{{ n.id }}</td>
+            <td>{{ n.reserva_id }}</td>
+            <td>{{ n.tipo_notificacion }}</td>
+            <td>{{ n.mensaje }}</td>
+            <td>{{ n.fecha_envio }}</td>
+            <td>{{ n.estado_envio }}</td>
+            <td>
+            <a href="{{url_for('historial.delete')}}" class="btn btn-danger">Eliminar</a>
+        </td>
+        </tr>
+        {% else %}
+        <tr><td colspan="7">No hay notificaciones registradas.</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
