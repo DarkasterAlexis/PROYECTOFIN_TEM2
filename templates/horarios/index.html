@@ -3,49 +3,48 @@
 {% block title %} HORARIOS {% endblock %}
 
 {% block content %}
-<div class="container mt-5" style="background-color: #1e1e1e; padding: 25px; border-radius: 10px; color: white;">
-    <h1 class="text-center mb-4" style="color: #f0c93d;">🕒 HORARIOS DE TRABAJO</h1>
 
-    <div class="text-center mb-4">
-        <img src="{{ url_for('static', filename='img/horarios.png') }}" alt="Horarios" width="130">
-    </div>
+<h1 class="text-center mb-4" style="color: #f0c93d;">🕒 HORARIOS DE TRABAJO</h1>
 
-    <div class="text-end mb-3">
-        <a href="{{ url_for('horarios.create') }}" class="btn btn-success">➕ Nuevo Horario</a>
-    </div>
-
-    <table class="table table-dark table-striped table-hover">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Personal ID</th>
-                <th>Fecha</th>
-                <th>Entrada</th>
-                <th>Salida</th>
-                <th>Día</th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for h in horarios %}
-            <tr>
-                <td>{{ h.HorarioID }}</td>
-                <td>{{ h.PersonalID }}</td>
-                <td>{{ h.Fecha }}</td>
-                <td>{{ h.HoraEntrada }}</td>
-                <td>{{ h.HoraSalida }}</td>
-                <td>{{ h.DiaSemana }}</td>
-                <td>
-                    <a href="{{ url_for('horarios.edit', id=h.HorarioID) }}" class="btn btn-warning btn-sm">Editar</a>
-                    <a href="{{ url_for('horarios.delete', id=h.HorarioID) }}" class="btn btn-danger btn-sm">Eliminar</a>
-                </td>
-            </tr>
-            {% else %}
-            <tr>
-                <td colspan="7" class="text-center">⚠️ No hay horarios registrados</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+<div class="text-center mb-4">
+    <img src="{{ url_for('static', filename='img/horarios.png') }}" alt="Horarios" width="130">
 </div>
+
+<div class="text-end mb-3">
+    <a href="{{ url_for('horarios.create') }}" class="btn btn-success">➕ Nuevo Horario</a>
+</div>
+
+<table class="table table-dark table-striped table-hover">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Personal ID</th>
+            <th>Fecha</th>
+            <th>Entrada</th>
+            <th>Salida</th>
+            <th>Día</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for h in horarios %}
+        <tr>
+            <td>{{ h.HorarioID }}</td>
+            <td>{{ h.PersonalID }}</td>
+            <td>{{ h.Fecha }}</td>
+            <td>{{ h.HoraEntrada }}</td>
+            <td>{{ h.HoraSalida }}</td>
+            <td>{{ h.DiaSemana }}</td>
+            <td>
+                <a href="{{ url_for('horarios.edit', id=h.HorarioID) }}" class="btn btn-warning btn-sm">Editar</a>
+                <a href="{{ url_for('horarios.delete', id=h.HorarioID) }}" class="btn btn-danger btn-sm">Eliminar</a>
+            </td>
+        </tr>
+        {% else %}
+        <tr>
+            <td colspan="7" class="text-center">⚠️ No hay horarios registrados</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
 {% endblock %}

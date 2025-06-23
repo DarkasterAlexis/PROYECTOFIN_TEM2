@@ -2,49 +2,51 @@
 {% block title %} RESERVAS {% endblock %}
 
 {% block content %}
-<div class="container mt-5" style="background-color: #1e1e1e; padding: 25px; border-radius: 10px; color: white;">
-    <h1 class="text-center mb-4" style="color: #f0c93d;">📅 LISTADO DE RESERVAS</h1>
 
-    <div class="text-center mb-4">
-        <img src="{{ url_for('static', filename='img/reserva.png') }}" alt="Reservas" width="130">
-    </div>
+<h1 class="text-center mb-4" style="color: #f0c93d;">📅 LISTADO DE RESERVAS</h1>
 
-    <div class="text-end mb-3">
-        <a href="{{ url_for('reserva.create') }}" class="btn btn-success">➕ Agregar  Reserva</a>
-    </div>
-
-    <table class="table table-dark table-striped table-hover">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Cliente ID</th>
-                <th>Recurso ID</th>
-                <th>Fecha</th>
-                <th>Inicio</th>
-                <th>Fin</th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for r in reservas %}
-            <tr>
-                <td>{{ r.ReservaID }}</td>
-                <td>{{ r.ClienteID }}</td>
-                <td>{{ r.RecursoID }}</td>
-                <td>{{ r.FechaReserva }}</td>
-                <td>{{ r.HoraInicio }}</td>
-                <td>{{ r.HoraFin }}</td>
-                <td>
-                    <a href="{{ url_for('reserva.edit', id=r.ReservaID) }}" class="btn btn-warning btn-sm">Editar</a>
-                    <a href="{{ url_for('reserva.delete', id=r.ReservaID) }}" class="btn btn-danger btn-sm">Eliminar</a>
-                </td>
-            </tr>
-            {% else %}
-            <tr>
-                <td colspan="7" class="text-center">⚠️ No hay reservas registradas</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+<div class="text-center mb-4">
+    <img src="{{ url_for('static', filename='img/reserva.png') }}" alt="Reservas" width="130">
 </div>
+
+<div class="text-end mb-3">
+    <a href="{{ url_for('reserva.create') }}" class="btn btn-success">➕ Agregar  Reserva</a>
+</div>
+
+<table class="table table-dark table-striped table-hover">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Cliente ID</th>
+            <th>Recurso ID</th>
+            <th>Fecha</th>
+            <th>Inicio</th>
+            <th>Fin</th>
+            <th>Editar</th>
+            <th>Eliminar</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for r in reservas %}
+        <tr>
+            <td>{{ r.ReservaID }}</td>
+            <td>{{ r.ClienteID }}</td>
+            <td>{{ r.RecursoID }}</td>
+            <td>{{ r.FechaReserva }}</td>
+            <td>{{ r.HoraInicio }}</td>
+            <td>{{ r.HoraFin }}</td>
+            <td>
+                <a href="{{ url_for('reserva.edit', id=r.ReservaID) }}" class="btn btn-warning btn-sm">Editar</a>
+            </td>
+            <td>
+                <a href="{{ url_for('reserva.delete', id=r.ReservaID) }}" class="btn btn-danger btn-sm">Eliminar</a>
+            </td>
+        </tr>
+        {% else %}
+        <tr>
+            <td colspan="8" class="text-center">⚠️ No hay reservas registradas</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
 {% endblock %}

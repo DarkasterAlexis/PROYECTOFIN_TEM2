@@ -2,9 +2,10 @@
 {%block title%}CONFIGURACION{%endblock%}
 
 {%block content%}
-<h1>CONFIGURACIÓN</h1>
-
-<a href="{{url_for('configuracion.create')}}" class="btn btn-success mb-1">Nuevo parametro</a>
+<h1 class="text-center mb-4" style="color: #f0c93d;">⚙️ CONFIGURACIÓN</h1>
+<div class="text-end mb-1">
+    <a href="{{url_for('configuracion.create')}}" class="btn btn-success mb-1">➕ Nuevo parametro</a>
+</div>
 <table class="table table-dark table-hover" >
     <tr>
         <td>ID</td>
@@ -27,7 +28,7 @@
     </tr>
     {%else%}
     <tr>
-        <td colspan="5px">No se han registrado parametros</td>
+        <td colspan="5px" class="text-center">⚠️ No se han registrado parametros</td>
     </tr>
     {%endfor%}
 </table>

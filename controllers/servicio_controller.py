@@ -4,6 +4,11 @@ from views import servicio_view
 
 servicios_bp = Blueprint('servicio', __name__,url_prefix="/servicios")
 
+@servicios_bp.route('/')
+def index():
+    servicio =Servicio.get_all()
+    return servicio_view.list(servicio)
+
 @servicios_bp.route('/create', methods=['GET','POST'])
 def create():
     if request.method == 'POST':
