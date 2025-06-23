@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block title %} PERSONAL {% endblock %}
+
+{% block content %}
+<div class="container mt-5" style="background-color: #1e1e1e; padding: 25px; border-radius: 10px; color: white;">
+    <h1 class="text-center mb-4" style="color: #f0c93d;">👨‍💼 GESTIÓN DE PERSONAL</h1>
+    
+    <div class="text-center mb-4">
+        <img src="{{ url_for('static', filename='img/personal.png') }}" alt="Personal" width="130">
+    </div>
+
+    <div class="text-end mb-3">
+        <a href="{{ url_for('personal.create') }}" class="btn btn-success">➕ Nuevo Personal</a>
+    </div>
+
+    <table class="table table-dark table-striped table-hover">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Email</th>
+                <th>Teléfono</th>
+                <th>Rol</th>
+                <th>Editar</th>
+                <th>Eliminar</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for p in personal %}
+            <tr>
+                <td>{{ p.PersonalID }}</td>
+                <td>{{ p.Nombre }}</td>
+                <td>{{ p.Apellido }}</td>
+                <td>{{ p.Email }}</td>
+                <td>{{ p.Telefono }}</td>
+                <td>{{ p.Rol }}</td>
+                <td><a href="{{ url_for('personal.edit', id=p.PersonalID) }}" class="btn btn-warning btn-sm">Editar</a></td>
+                <td><a href="{{ url_for('personal.delete', id=p.PersonalID) }}" class="btn btn-danger btn-sm">Eliminar</a></td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="8" class="text-center">⚠️ No se ha registrado personal</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

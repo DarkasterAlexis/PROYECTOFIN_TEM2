@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block title %} HORARIOS | EDITAR {% endblock %}
+
+{% block content %}
+<div class="container mt-5" style="background-color: #1e1e1e; padding: 25px; color: white;">
+    <h2 class="text-center mb-4" style="color: #f0c93d;">✏️ EDITAR HORARIO</h2>
+    <form action="{{ url_for('horarios.edit', id=horario.HorarioID) }}" method="POST" class="mx-auto" style="max-width: 600px;">
+        <div class="mb-3">
+            <label class="form-label">Fecha</label>
+            <input type="date" class="form-control" name="Fecha" value="{{ horario.Fecha }}" required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Hora Entrada</label>
+            <input type="time" class="form-control" name="HoraEntrada" value="{{ horario.HoraEntrada }}" required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Hora Salida</label>
+            <input type="time" class="form-control" name="HoraSalida" value="{{ horario.HoraSalida }}" required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Día Semana</label>
+            <input type="text" class="form-control" name="DiaSemana" value="{{ horario.DiaSemana }}" required>
+        </div>
+        <div class="text-center">
+            <button type="submit" class="btn btn-warning">Actualizar Horario</button>
+        </div>
+    </form>
+</div>
+{% endblock %}
+
+      
