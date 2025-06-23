@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block title %} RECURSOS {% endblock %}
+
+{% block content %}
+<h1 class="text-center mb-4" style="color: #f0c93d;">📦 GESTIÓN DE RECURSOS</h1>
+
+<div class="text-center mb-4">
+    {# Asume que tienes una imagen en static/img/recursos.png #}
+    <img src="{{ url_for('static', filename='img/recursos.png') }}" alt="Recursos" width="130">
+</div>
+
+<div class="text-end mb-3">
+    <a href="{{ url_for('recurso.create') }}" class="btn btn-success">➕ Nuevo Recurso</a>
+</div>
+
+<table class="table table-dark table-striped table-hover">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nombre del Recurso</th>
+            <th>Tipo de Recurso</th>
+            <th>Capacidad</th>
+            <th>Descripción</th>
+            <th>Editar</th>
+            <th>Eliminar</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for r in recursos %}
+        <tr>
+            <td>{{ r.RecursoID }}</td>
+            <td>{{ r.NombreRecurso }}</td>
+            <td>{{ r.TipoRecurso }}</td>
+            <td>{{ r.Capacidad }}</td>
+            <td>{{ r.Descripcion if r.Descripcion else 'N/A' }}</td> {# Muestra N/A si no hay descripción #}
+            <td><a href="{{ url_for('recurso.edit', id=r.RecursoID) }}" class="btn btn-warning btn-sm">Editar</a></td>
+            <td><a href="{{ url_for('recurso.delete', id=r.RecursoID) }}" class="btn btn-danger btn-sm">Eliminar</a></td>
+        </tr>
+        {% else %}
+        <tr>
+            <td colspan="7" class="text-center">⚠️ No se ha registrado recursos</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

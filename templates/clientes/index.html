@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block title %} CLIENTES {% endblock %}
+
+{% block content %}
+<h1 class="text-center mb-4" style="color: #f0c93d;">👥 GESTIÓN DE CLIENTES</h1>
+
+<div class="text-center mb-4">
+    {# Asume que tienes una imagen en static/img/clientes.png #}
+    <img src="{{ url_for('static', filename='img/clientes.png') }}" alt="Clientes" width="130">
+</div>
+
+<div class="text-end mb-3">
+    <a href="{{ url_for('cliente.create') }}" class="btn btn-success">➕ Nuevo Cliente</a>
+</div>
+
+<table class="table table-dark table-striped table-hover">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Email</th>
+            <th>Teléfono</th>
+            <th>Contraseña Hash</th>
+            <th>Editar</th>
+            <th>Eliminar</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for c in clientes %}
+        <tr>
+            <td>{{ c.ClienteID }}</td>
+            <td>{{ c.Nombre }}</td>
+            <td>{{ c.Apellido }}</td>
+            <td>{{ c.Email }}</td>
+            <td>{{ c.Telefono }}</td>
+            <td>{{ c.ContrasenaHash if c.ContrasenaHash else 'N/A' }}</td> {# Muestra N/A si no hay hash #}
+            <td><a href="{{ url_for('cliente.edit', id=c.ClienteID) }}" class="btn btn-warning btn-sm">Editar</a></td>
+            <td><a href="{{ url_for('cliente.delete', id=c.ClienteID) }}" class="btn btn-danger btn-sm">Eliminar</a></td>
+        </tr>
+        {% else %}
+        <tr>
+            <td colspan="8" class="text-center">⚠️ No se ha registrado clientes</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
