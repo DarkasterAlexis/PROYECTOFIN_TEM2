@@ -6,24 +6,28 @@
     <h1 class="text-center mb-4">REGISTRAR PERSONAL</h1>
     <form action="{{ url_for('personal.create') }}" method="POST" class="mx-auto" style="max-width: 600px;">
         <div class="mb-3">
-            <label class="form-label">Nombre</label>
-            <input type="text" class="form-control" name="Nombre" required>
+            <label for="nam" class="form-label">Nombre</label>
+            <input type="text" class="form-control"  id="nam" name="Nombre" required>
         </div>
         <div class="mb-3">
-            <label class="form-label">Apellido</label>
-            <input type="text" class="form-control" name="Apellido" required>
+            <label for="ape" class="form-label">Apellido</label>
+            <input type="text" class="form-control"  id="ape" name="Apellido" required>
         </div>
         <div class="mb-3">
-            <label class="form-label">Email</label>
-            <input type="email" class="form-control" name="Email" required>
+            <label for="ema" class="form-label">Email</label>
+            <input type="email" class="form-control" id="ema"  name="Email" required>
         </div>
         <div class="mb-3">
-            <label class="form-label">Teléfono</label>
-            <input type="text" class="form-control" name="Telefono" required>
+            <label for="tel" class="form-label">Teléfono</label>
+            <input type="text" class="form-control"  id="tel" name="Telefono" required>
         </div>
         <div class="mb-3">
-            <label class="form-label">Rol</label>
-            <input type="text" class="form-control" name="Rol" required>
+            <label for="pass" class="form-label">Contraseña</label>
+            <input type="password" name="password" class="form-control" id="pass" required>
+        </div>
+        <div class="mb-3">
+            <label for="ro" class="form-label">Rol</label>
+            <input type="text" class="form-control"  id="ro" name="Rol" required>
         </div>
         <div class="text-center">
             <button type="submit" class="btn btn-primary">REGISTRAR</button>

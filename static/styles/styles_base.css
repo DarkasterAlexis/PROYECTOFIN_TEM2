@@ -1,0 +1,45 @@
+* {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+body{
+  background-image: url('../imagenes/fondo.jpg');
+  background-size: 120%;
+  position: relative;
+  margin: 0;
+}
+
+nav{
+    margin: 40;
+    padding: 0px 0;
+}
+
+nav ul{
+    background: linear-gradient(to bottom, rgb(74, 3, 3), rgb(163, 23, 13), rgb(197, 89, 31), rgba(245, 146, 107, 0.568), rgba(243, 219, 194, 0.055), rgba(243, 192, 151, 0));
+    list-style: none;
+    height: 170px;
+    padding: 20px 190px;
+    display: flex;
+    justify-content: left;
+}
+
+nav ul li{
+    margin: 0 0px;
+}
+
+nav ul li a{
+    color: rgb(29, 245, 10);
+    text-decoration: none;
+    padding: 60px 30px;
+    border-radius: 1px;
+    font-size: 30px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    text-shadow: 9px 15px 10px rgba(255, 255, 0, 1), 0px 0px 10px rgba(255, 140, 0, 0.8);
+}
+
+nav ul li a:hover{
+    text-shadow: 0px 0px 15px rgba(255, 255, 0, 1), 0px 0px 30px rgba(255, 255, 0, 0.8);
+}

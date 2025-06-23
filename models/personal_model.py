@@ -8,13 +8,15 @@ class Personal(db.Model):
     Apellido = db.Column(db.String(100), nullable=False)
     Email = db.Column(db.String(255), nullable=False)
     Telefono = db.Column(db.String(20), nullable=False)
+    password = db.Column(db.String(20),nullable=False)
     Rol = db.Column(db.String(50), nullable=False)
 
-    def _init_(self, Nombre, Apellido, Email, Telefono, Rol):
+    def _init_(self, Nombre, Apellido, Email, Telefono,password, Rol):
         self.Nombre = Nombre
         self.Apellido = Apellido
         self.Email = Email
         self.Telefono = Telefono
+        self.password=password
         self.Rol = Rol
 
     def save(self):
@@ -29,12 +31,14 @@ class Personal(db.Model):
     def get_by_id(id):
         return Personal.query.get(id)
 
-    def update(self, Nombre=None, Apellido=None, Email=None, Telefono=None, Rol=None):
-        if Nombre: self.Nombre = Nombre
-        if Apellido: self.Apellido = Apellido
-        if Email: self.Email = Email
-        if Telefono: self.Telefono = Telefono
-        if Rol: self.Rol = Rol
+    def update(self, Nombre=None, Apellido=None, Email=None, Telefono=None,password=None, Rol=None):
+        if Nombre and Apellido and Email and Telefono and password and Rol:
+                self.Nombre = Nombre
+                self.Apellido = Apellido
+                self.Email = Email
+                self.Telefono = Telefono
+                self.password = password
+                self.Rol = Rol
         db.session.commit()
 
     def delete(self):
