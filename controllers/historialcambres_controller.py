@@ -9,33 +9,8 @@ def index():
     historia = HistorialCambioReserva.get_all()
     return historialcambres_view.list(historia)
 
-@historial_bp.route('/create', methods=['GET','POST'])
-def create():
-    if request.method == 'POST':
-        reser_id=request.form['reser_id']
-        campomodificado=request.form['campomodificado']
-        valorantiguo=request.form['valorantiguo']
-        valornuevo=request.form['valornuevo']
-        fechacambio=request.form['fechacambio']
-        usuariomodifi_id=request.form['usuariomodifi_id']
-        historial = HistorialCambioReserva(reser_id,campomodificado,valorantiguo,valornuevo,fechacambio)
-        historial.save()
-        return redirect(url_for('historial.index'))
-    return historialcambres_view.create()
 
-@historial_bp.route('/edit/<int:id>', methods=['GET','POST'])
-def edit(id):
-    historial = HistorialCambioReserva.get_by_id(id)
-    if request.method == 'POST':
-        campomodificado=request.form['campomodificado']
-        valorantiguo=request.form['valorantiguo']
-        valornuevo=request.form['valornuevo']
-        fechacambio=request.form['fechacambio']
-        historial.update(campomodificado,valorantiguo,valornuevo,fechacambio)
-        return redirect(url_for('historial.index'))
-    return historialcambres_view.edit()
-
-@historial_bp.route('/delete/<int:id>', methods=['GET','POST'])
+@historial_bp.route("/delete/<int:id>", methods=['GET','POST'])
 def delete(id):
     historial = HistorialCambioReserva.get_by_id(id)
     historial.delete()
