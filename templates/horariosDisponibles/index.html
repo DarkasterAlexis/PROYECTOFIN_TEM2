@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% block title %} HORARIOS DISPONIBLES {% endblock %}
+
+{% block content %}
+<h1 class="text-center mb-4" style="color: #f0c93d;">⏰ GESTIÓN DE HORARIOS DISPONIBLES</h1>
+
+<div class="text-center mb-4">
+    {# Asume que tienes una imagen en static/img/horarios.png #}
+    <img src="{{ url_for('static', filename='img/horarios.png') }}" alt="Horarios" width="130">
+</div>
+
+<div class="text-end mb-3">
+    <a href="{{ url_for('horario_disponible.create') }}" class="btn btn-success">➕ Nuevo Horario Disponible</a>
+</div>
+
+<table class="table table-dark table-striped table-hover">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Recurso ID</th>
+            <th>Fecha</th>
+            <th>Hora Inicio</th>
+            <th>Hora Fin</th>
+            <th>¿Disponible?</th>
+            <th>Notas</th>
+            <th>Editar</th>
+            <th>Eliminar</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for hd in horarios_disponibles %}
+        <tr>
+            <td>{{ hd.SlotID }}</td>
+            <td>{{ hd.RecursoID }}</td>
+            <td>{{ hd.Fecha.strftime('%Y-%m-%d') }}</td> {# Formatear la fecha #}
+            <td>{{ hd.HoraInicio.strftime('%H:%M') }}</td> {# Formatear la hora #}
+            <td>{{ hd.HoraFin.strftime('%H:%M') }}</td> {# Formatear la hora #}
+            <td>
+                {% if hd.EstaDisponible %}
+                    ✅ Sí
+                {% else %}
+                    ❌ No
+                {% endif %}
+            </td>
+            <td>{{ hd.Notas if hd.Notas else 'N/A' }}</td> {# Muestra N/A si no hay notas #}
+            <td><a href="{{ url_for('horario_disponible.edit', id=hd.SlotID) }}" class="btn btn-warning btn-sm">Editar</a></td>
+            <td><a href="{{ url_for('horario_disponible.delete', id=hd.SlotID) }}" class="btn btn-danger btn-sm">Eliminar</a></td>
+        </tr>
+        {% else %}
+        <tr>
+            <td colspan="9" class="text-center">⚠️ No se han registrado horarios disponibles</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
