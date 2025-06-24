@@ -1,0 +1,34 @@
+<!-- templates/clientes/create.html -->
+{% extends 'base.html' %}
+{% block title %}Registrar Cliente{% endblock %}
+
+{% block content %}
+<h2 class="text-center mb-4">ACTUALIZAR CLIENTE</h2>
+<form action="{{ url_for('cliente.edit') }}" method="POST">
+    <div class="text-center">
+        <label for="nom" class="form-label">Nombre:</label>
+        <input type="text" name="nombre" class="form-control" id="nom" value="{{cliente.nombre}}" required><br>
+    </div>
+    <div class="text-center">
+        <label for="ape" class="form-label">Apellido:</label>
+        <input type="text" name="apellido" class="form-control" id="ape" value="{{cliente.apellido}}" required><br>
+    </div>
+    <div class="text-center">
+        <label for="em" class="form-label">Email:</label>
+        <input type="email" name="email" class="form-control" id="em" value="{{cliente.email}}" required><br>
+    </div>
+    <div class="text-center">
+        <label for="tel" class="form-label">Teléfono:</label>
+        <input type="text" name="telefono" class="form-control" id="tel" value="{{cliente.telefono}}" required><br>
+    </div>
+    <div class="text-center">
+        <label for="ro" class="form-label">Rol:</label>
+        <input type="texto" name="rol" class="form-control" id="ro" value="cliente" required><br>
+    </div>
+    <div class="text-center">
+        <label for="pass" class="form-label">Contraseña:</label>
+        <input type="password" name="contrasena" class="form-control" id="pass" value="{{cliente.contrasena}}" required><br>
+    </div>
+  <button type="submit" class="btn btn-primary">ACTUALIZAR CLIENTE</button>
+</form>
+{% endblock %}

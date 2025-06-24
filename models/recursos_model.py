@@ -3,7 +3,7 @@ from database import db
 class Recurso(db.Model):
     __tablename__ = "recursos"  # El nombre de la tabla en la base de datos
 
-    recursoID = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
     nombreRecurso = db.Column(db.String(100), nullable=False)
     tipoRecurso = db.Column(db.String(50), nullable=False)
     capacidad = db.Column(db.Integer, nullable=False)

@@ -5,10 +5,7 @@
 <div class="container mt-5" style="background-color: #1e1e1e; padding: 25px; color: white;">
     <h2 class="text-center mb-4" style="color: #f0c93d;">🆕 NUEVO HORARIO</h2>
     <form action="{{ url_for('horarios.create') }}" method="POST" class="mx-auto" style="max-width: 600px;">
-        <div class="mb-3">
-            <label class="form-label">Personal ID</label>
-            <input type="number" class="form-control" name="PersonalID" required>
-        </div>
+        
         <div class="mb-3">
             <label class="form-label">Fecha</label>
             <input type="date" class="form-control" name="Fecha" required>

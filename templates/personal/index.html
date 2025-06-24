@@ -4,10 +4,6 @@
 {% block content %}
 <h1 class="text-center mb-4" style="color: #f0c93d;">👨‍💼 GESTIÓN DE PERSONAL</h1>
 
-<div class="text-center mb-4">
-    <img src="{{ url_for('static', filename='img/personal.png') }}" alt="Personal" width="130">
-</div>
-
 <div class="text-end mb-3">
     <a href="{{ url_for('personal.create') }}" class="btn btn-success">➕ Nuevo Personal</a>
 </div>
@@ -28,14 +24,14 @@
     <tbody>
         {% for p in personal %}
         <tr>
-            <td>{{ p.PersonalID }}</td>
+            <td>{{ p.id }}</td>
             <td>{{ p.Nombre }}</td>
             <td>{{ p.Apellido }}</td>
-            <td>{{ p.Email }}</td>
+            <td>{{ p.email }}</td>
             <td>{{ p.Telefono }}</td>
-            <td>{{ p.Rol }}</td>
-            <td><a href="{{ url_for('personal.edit', id=p.PersonalID) }}" class="btn btn-warning btn-sm">Editar</a></td>
-            <td><a href="{{ url_for('personal.delete', id=p.PersonalID) }}" class="btn btn-danger btn-sm">Eliminar</a></td>
+            <td>{{ p.rol }}</td>
+            <td><a href="{{ url_for('personal.edit', id=p.id) }}" class="btn btn-warning btn-sm">Editar</a></td>
+            <td><a href="{{ url_for('personal.delete', id=p.id) }}" class="btn btn-danger btn-sm">Eliminar</a></td>
         </tr>
         {% else %}
         <tr>

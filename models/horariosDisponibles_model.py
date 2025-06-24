@@ -5,7 +5,7 @@ class HorarioDisponible(db.Model):
     __tablename__ = "horarios_disponibles" # El nombre de la tabla en la base de datos
 
     slotID = db.Column(db.Integer, primary_key=True)
-    recursoID = db.Column(db.Integer, db.ForeignKey('recursos.recursoID'), nullable=False)
+    id = db.Column(db.Integer, db.ForeignKey('recursos.id'), nullable=False)
     fecha = db.Column(db.Date, nullable=False)
     horaInicio = db.Column(db.Time, nullable=False)
     horaFin = db.Column(db.Time, nullable=False)
@@ -15,8 +15,8 @@ class HorarioDisponible(db.Model):
     # Relación con la tabla Recursos (opcional pero recomendable para una buena práctica)
     recurso = db.relationship('Recurso', backref='horarios_disponibles')
 
-    def __init__(self, recursoID, fecha, horaInicio, horaFin, estaDisponible=True, notas=None):
-        self.recursoID = recursoID
+    def __init__(self, id, fecha, horaInicio, horaFin, estaDisponible=True, notas=None):
+        self.id = id
         self.fecha = fecha
         self.horaInicio = horaInicio
         self.horaFin = horaFin
@@ -39,17 +39,17 @@ class HorarioDisponible(db.Model):
         return HorarioDisponible.query.get(id)
 
     @staticmethod
-    def get_available_slots_for_resource_and_date(recurso_id, fecha):
+    def get_available_slots_for_resource_and_date(id, fecha):
         """Obtiene slots disponibles para un recurso y fecha específicos."""
         return HorarioDisponible.query.filter_by(
-            recursoID=recurso_id,
+            id=id,
             fecha=fecha,
             estaDisponible=True
         ).all()
 
-    def update(self, recursoID=None, fecha=None, horaInicio=None, horaFin=None, estaDisponible=None, notas=None):
+    def update(self, id=None, fecha=None, horaInicio=None, horaFin=None, estaDisponible=None, notas=None):
         """Actualiza la información de un horario disponible existente."""
-        if recursoID: self.recursoID = recursoID
+        if id: self.id = id
         if fecha: self.fecha = fecha
         if horaInicio: self.horaInicio = horaInicio
         if horaFin: self.horaFin = horaFin

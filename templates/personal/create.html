@@ -15,7 +15,7 @@
         </div>
         <div class="mb-3">
             <label for="ema" class="form-label">Email</label>
-            <input type="email" class="form-control" id="ema"  name="Email" required>
+            <input type="email" class="form-control" id="ema"  name="email" required>
         </div>
         <div class="mb-3">
             <label for="tel" class="form-label">Teléfono</label>
@@ -27,7 +27,10 @@
         </div>
         <div class="mb-3">
             <label for="ro" class="form-label">Rol</label>
-            <input type="text" class="form-control"  id="ro" name="Rol" required>
+            <select name="rol" class="form-select" id="role">
+                    <option value="admin">Admin</option>
+                    <option value="person">Personal</option>
+                </select>
         </div>
         <div class="text-center">
             <button type="submit" class="btn btn-primary">REGISTRAR</button>

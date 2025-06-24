@@ -4,11 +4,6 @@
 {% block content %}
 <h1 class="text-center mb-4" style="color: #f0c93d;">⏰ GESTIÓN DE HORARIOS DISPONIBLES</h1>
 
-<div class="text-center mb-4">
-    {# Asume que tienes una imagen en static/img/horarios.png #}
-    <img src="{{ url_for('static', filename='img/horarios.png') }}" alt="Horarios" width="130">
-</div>
-
 <div class="text-end mb-3">
     <a href="{{ url_for('horario_disponible.create') }}" class="btn btn-success">➕ Nuevo Horario Disponible</a>
 </div>
@@ -30,11 +25,11 @@
     <tbody>
         {% for hd in horarios_disponibles %}
         <tr>
-            <td>{{ hd.SlotID }}</td>
-            <td>{{ hd.RecursoID }}</td>
-            <td>{{ hd.Fecha.strftime('%Y-%m-%d') }}</td> {# Formatear la fecha #}
-            <td>{{ hd.HoraInicio.strftime('%H:%M') }}</td> {# Formatear la hora #}
-            <td>{{ hd.HoraFin.strftime('%H:%M') }}</td> {# Formatear la hora #}
+            <td>{{ hd.slotID }}</td>
+            <td>{{ hd.id }}</td>
+            <td>{{ hd.fecha.strftime('%Y-%m-%d') }}</td> {# Formatear la fecha #}
+            <td>{{ hd.horaInicio.strftime('%H:%M') }}</td> {# Formatear la hora #}
+            <td>{{ hd.horaFin.strftime('%H:%M') }}</td> {# Formatear la hora #}
             <td>
                 {% if hd.EstaDisponible %}
                     ✅ Sí

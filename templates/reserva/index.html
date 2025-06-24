@@ -5,10 +5,6 @@
 
 <h1 class="text-center mb-4" style="color: #f0c93d;">📅 LISTADO DE RESERVAS</h1>
 
-<div class="text-center mb-4">
-    <img src="{{ url_for('static', filename='img/reserva.png') }}" alt="Reservas" width="130">
-</div>
-
 <div class="text-end mb-3">
     <a href="{{ url_for('reserva.create') }}" class="btn btn-success">➕ Agregar  Reserva</a>
 </div>
@@ -30,7 +26,7 @@
         {% for r in reservas %}
         <tr>
             <td>{{ r.ReservaID }}</td>
-            <td>{{ r.ClienteID }}</td>
+            <td>{{ r.id }}</td>
             <td>{{ r.RecursoID }}</td>
             <td>{{ r.FechaReserva }}</td>
             <td>{{ r.HoraInicio }}</td>

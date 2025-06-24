@@ -4,14 +4,14 @@ class HorariosTrabajoPersonal(db.Model):
     _tablename_ = "horariostrabajopersonal"
 
     HorarioID = db.Column(db.Integer, primary_key=True)
-    PersonalID = db.Column(db.Integer, db.ForeignKey("personal.PersonalID"), nullable=False)
+    id = db.Column(db.Integer, db.ForeignKey("personal.id"), nullable=False)
     Fecha = db.Column(db.Date, nullable=False)
     HoraEntrada = db.Column(db.Time, nullable=False)
     HoraSalida = db.Column(db.Time, nullable=False)
     DiaSemana = db.Column(db.String(20), nullable=False)
 
-    def _init_(self, PersonalID, Fecha, HoraEntrada, HoraSalida, DiaSemana):
-        self.PersonalID = PersonalID
+    def __init__(self, id, Fecha, HoraEntrada, HoraSalida, DiaSemana):
+        self.id = id
         self.Fecha = Fecha
         self.HoraEntrada = HoraEntrada
         self.HoraSalida = HoraSalida

@@ -12,9 +12,9 @@ def index():
 @configuracion_bp.route('/create', methods=['GET','POST'])
 def create():
     if request.method == 'POST':
-        nombre_parametro=request.form['nombre_parametro']
-        valor_parametro=request.form['valor_parametro']
-        config = ConfiguracionNegocio(nombre_parametro,valor_parametro)
+        nombreparametro=request.form['nombreparametro']
+        valorparametro=request.form['valorparametro']
+        config = ConfiguracionNegocio(nombreparametro,valorparametro)
         config.save()
         return redirect(url_for('configuracion.index'))
     return configuracionNeg_view.create()
@@ -23,9 +23,9 @@ def create():
 def edit(id):
     config = ConfiguracionNegocio.get_by_id(id)    
     if request.method == 'POST':
-        nombre_parametro=request.form['nombre_parametro']
-        valor_parametro=request.form['valor_parametro']
-        config.update(nombre_parametro=nombre_parametro,valor_parametro=valor_parametro)
+        nombreparametro=request.form['nombre_parametro']
+        valorparametro=request.form['valor_parametro']
+        config.update(nombreparametro=nombreparametro,valorparametro=valorparametro)
         return redirect(url_for('configuracion.index'))
     return configuracionNeg_view.edit(config)
 

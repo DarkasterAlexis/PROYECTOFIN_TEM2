@@ -31,18 +31,13 @@ def create():
     
     if request.method == 'POST':
         # Se recuperan los datos del formulario enviado
-        nombre_recurso = request.form['nombre_recurso']
-        tipo_recurso = request.form['tipo_recurso']
+        nombreRecurso = request.form['nombreRecurso']
+        tipoRecurso = request.form['tipoRecurso']
         capacidad = int(request.form['capacidad']) # Convertir a entero
         descripcion = request.form.get('descripcion') # Opcional
 
         # Se crea una nueva instancia del modelo Recurso
-        recurso = Recurso(
-            NombreRecurso=nombre_recurso,
-            TipoRecurso=tipo_recurso,
-            Capacidad=capacidad,
-            Descripcion=descripcion
-        )
+        recurso = Recurso(nombreRecurso,tipoRecurso,capacidad,descripcion)
         # Se guarda el nuevo recurso en la base de datos
         recurso.save()
         # Se redirige a la ruta de índice de recursos
@@ -71,17 +66,17 @@ def edit(id):
 
     if request.method == 'POST':
         # Se recuperan los datos actualizados del formulario
-        nombre_recurso = request.form['nombre_recurso']
-        tipo_recurso = request.form['tipo_recurso']
+        nombreRecurso = request.form['nombreRecurso']
+        tipoRecurso = request.form['tipoRecurso']
         capacidad = int(request.form['capacidad']) # Convertir a entero
         descripcion = request.form.get('descripcion') # Opcional
 
         # Se actualizan los atributos del objeto recurso
         recurso.update(
-            NombreRecurso=nombre_recurso,
-            TipoRecurso=tipo_recurso,
-            Capacidad=capacidad,
-            Descripcion=descripcion
+            nombreRecurso=nombreRecurso,
+            tipoRecurso=tipoRecurso,
+            capacidad=capacidad,
+            descripcion=descripcion
         )
         
         # Se redirige a la ruta de índice de recursos

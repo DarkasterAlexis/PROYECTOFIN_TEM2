@@ -4,7 +4,7 @@ class Reserva(db.Model):
     _tablename_ = "reservas"
 
     ReservaID = db.Column(db.Integer, primary_key=True)
-    ClienteID = db.Column(db.Integer, nullable=False)
+    id = db.Column(db.Integer, nullable=False)
     RecursoID = db.Column(db.Integer, nullable=False)
     FechaReserva = db.Column(db.Date, nullable=False)
     HoraInicio = db.Column(db.Time, nullable=False)
@@ -15,10 +15,10 @@ class Reserva(db.Model):
     FechaCreacion = db.Column(db.DateTime)
     NotasCliente = db.Column(db.Text)
 
-    def _init_(self, ClienteID, RecursoID, FechaReserva, HoraInicio, HoraFin,
+    def __init__(self, id, RecursoID, FechaReserva, HoraInicio, HoraFin,
                  NumeroPersonas=None, TipoCita=None, EstadoReserva=None,
                  FechaCreacion=None, NotasCliente=None):
-        self.ClienteID = ClienteID
+        self.id = id
         self.RecursoID = RecursoID
         self.FechaReserva = FechaReserva
         self.HoraInicio = HoraInicio
@@ -41,11 +41,11 @@ class Reserva(db.Model):
     def get_by_id(id):
         return Reserva.query.get(id)
 
-    def update(self, ClienteID=None, RecursoID=None, FechaReserva=None, HoraInicio=None, HoraFin=None,
+    def update(self, id=None, RecursoID=None, FechaReserva=None, HoraInicio=None, HoraFin=None,
                NumeroPersonas=None, TipoCita=None, EstadoReserva=None, FechaCreacion=None, NotasCliente=None):
         # Actualizar solo si todos los parámetros obligatorios están presentes
-        if ClienteID is not None and RecursoID is not None and FechaReserva is not None and HoraInicio is not None and HoraFin is not None:
-            self.ClienteID = ClienteID
+        if id is not None and RecursoID is not None and FechaReserva is not None and HoraInicio is not None and HoraFin is not None:
+            self.ClienteID = id
             self.RecursoID = RecursoID
             self.FechaReserva = FechaReserva
             self.HoraInicio = HoraInicio

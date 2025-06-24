@@ -5,14 +5,7 @@
 <div class="container mt-5" style="background-color: #1e1e1e; padding: 25px; color: white;">
     <h2 class="text-center mb-4" style="color: #f0c93d;">✏️ EDITAR RESERVA</h2>
     <form action="{{ url_for('reserva.edit', id=reserva.ReservaID) }}" method="POST" class="mx-auto" style="max-width: 600px;">
-        <div class="mb-3">
-            <label class="form-label">Cliente ID</label>
-            <input type="number" class="form-control" name="ClienteID" value="{{ reserva.ClienteID }}" required>
-        </div>
-        <div class="mb-3">
-            <label class="form-label">Recurso ID</label>
-            <input type="number" class="form-control" name="RecursoID" value="{{ reserva.RecursoID }}" required>
-        </div>
+        
         <div class="mb-3">
             <label class="form-label">Fecha Reserva</label>
             <input type="date" class="form-control" name="FechaReserva" value="{{ reserva.FechaReserva }}" required>

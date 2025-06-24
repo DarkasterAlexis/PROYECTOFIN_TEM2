@@ -1,0 +1,28 @@
+<!-- templates/recursos/create.html -->
+{% extends 'base.html' %}
+{% block title %}Registrar Recurso{% endblock %}
+
+{% block content %}
+<h2>Registrar Recurso</h2>
+<form action="{{ url_for('recurso.create') }}" method="POST">
+    <div class="mb-3">
+        <label for="nom" class="form-label">Nombre del Recurso:</label>
+        <input type="text" name="nombreRecurso" class="form-control" id="nom" required><br>
+    </div>
+    <div class="mb-3">
+        <label for="tip" class="form-label">Tipo de Recurso:</label>
+        <input type="text" name="tipoRecurso" class="form-control" id="tip" required><br>
+    </div>
+    <div class="mb-3">
+        <label for="cap" class="form-label">Capacidad:</label>
+        <input type="number" name="capacidad" class="form-control" id="cap" min="1"><br>
+    </div>
+    <div class="mb-3">
+        <label for="des" class="form-label">Descripción:</label>
+        <textarea name="descripcion" class="form-control" id="des"></textarea><br>
+    </div>
+    <div class="mb-3">
+        <button type="submit" class="btn btn-primary">Registrar</button>
+    </div>
+</form>
+{% endblock %}

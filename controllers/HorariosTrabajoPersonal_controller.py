@@ -12,13 +12,13 @@ def index():
 @horarios_bp.route('/create', methods=['GET', 'POST'])
 def create():
     if request.method == 'POST':
-        PersonalID = request.form['PersonalID']
+        
         Fecha = request.form['Fecha']
         HoraEntrada = request.form['HoraEntrada']
         HoraSalida = request.form['HoraSalida']
         DiaSemana = request.form['DiaSemana']
 
-        horario = HorariosTrabajoPersonal(PersonalID, Fecha, HoraEntrada, HoraSalida, DiaSemana)
+        horario = HorariosTrabajoPersonal(id, Fecha, HoraEntrada, HoraSalida, DiaSemana)
         horario.save()
         return redirect(url_for('horarios.index'))
     return HorariosTrabajoPersonal_view.create()

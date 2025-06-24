@@ -16,21 +16,21 @@ def create():
     if request.method == 'POST':
         nombre = request.form['Nombre']
         apellido = request.form['Apellido']
-        email = request.form['Email']
+        email = request.form.get('email')
         telefono = request.form['Telefono']
         password = request.form['password']
-        rol = request.form['Rol']
+        rol = request.form.get('rol')
         persona = Personal(nombre, apellido, email, telefono,password, rol)
         persona.save()       
         usuario = Usuario(
             Nombre =nombre,
             Apellido = apellido,
-            Email = email,
+            email = email,
             Telefono = telefono,
             password = generate_password_hash(password),
             idtipouser = persona.id,
             tiprelacion = "personal",
-            Rol = rol
+            rol = rol
         )
         usuario.save()    
         return redirect(url_for('personal.index'))
@@ -47,7 +47,7 @@ def edit(id):
         password = request.form['password']
         rol = request.form['Rol']
 
-        persona.update(nombre, apellido, email, telefono,password, rol)
+        persona.update(nombre=nombre, apellido=apellido, email=email, telefono=telefono,password=generate_password_hash(password), rol=rol)
         return redirect(url_for('personal.index'))
     return personal_view.edit(persona)
 
@@ -56,3 +56,4 @@ def delete(id):
     persona = Personal.get_by_id(id)
     persona.delete()
     return redirect(url_for('personal.index'))
+

@@ -17,40 +17,40 @@
           <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="nav justify-content-center" >
               <li class="nav-item">
-                <a class="nav-link {{is_active('/usuarios/')}}"  href="/usuarios/" ><strong>Usuarios</strong> </a>
+                <a class="nav-link {{is_active('/usuarios/')}}"  href="/usuarios/" style="font-size: 27px; color: rgb(41, 3, 125);"><strong>Usuarios</strong> </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link {{is_active('/clientes/')}}" href="/clientes/"><strong>Clientes</strong> </a>
+                <a class="nav-link {{is_active('/clientes/')}}" href="/clientes/" style="font-size: 27px; color: rgb(41, 3, 125);"><strong>Clientes</strong> </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link {{is_active('/recursos/')}}" href="/recursos/"><strong>Recursos</strong> </a>
+                <a class="nav-link {{is_active('/recursos/')}}" href="/recursos/" style="font-size: 27px; color: rgb(41, 3, 125);"><strong>Recursos</strong> </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link {{is_active('/horariosDisponibles/')}}" href="/horariosDisponibles/"><strong>Horarios Disponibles</strong>  </a>
+                <a class="nav-link {{is_active('/horariosDisponibles/')}}" href="/horariosDisponibles/" style="font-size: 27px; color: rgb(41, 3, 125);"><strong>Horarios Disponibles</strong>  </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link {{is_active('/personal/')}}" href="/personal/"><strong>Personal</strong> </a>
+                <a class="nav-link {{is_active('/personal/')}}" href="/personal/" style="font-size: 27px; color: rgb(41, 3, 125);"><strong>Personal</strong> </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link {{is_active('/reserva/')}}" href="/reserva/"><strong>Reservas</strong> </a>
+                <a class="nav-link {{is_active('/reserva/')}}" href="/reserva/" style="font-size: 27px; color: rgb(41, 3, 125);"><strong>Reservas</strong> </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link {{is_active('/horarios/')}}" href="/horarios/"><strong>Horarios</strong> </a>
+                <a class="nav-link {{is_active('/horarios/')}}" href="/horarios/" style="font-size: 27px; color: rgb(41, 3, 125);"><strong>Horarios</strong> </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link {{is_active('/configNeg/')}}" href="/configNeg/"><strong>Configuracion</strong> </a>
+                <a class="nav-link {{is_active('/configNeg/')}}" href="/configNeg/" style="font-size: 27px; color: rgb(41, 3, 125);"><strong>Configuracion</strong> </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link {{is_active('/historial/')}}" href="/historial/"><strong>Historial</strong> </a>
+                <a class="nav-link {{is_active('/historial/')}}" href="/historial/" style="font-size: 27px; color: rgb(41, 3, 125);"><strong>Historial</strong> </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link {{is_active('/notificaciones/')}}" href="/notificaciones/"><strong>Notificaciones</strong> </a>
+                <a class="nav-link {{is_active('/notificaciones/')}}" href="/notificaciones/" style="font-size: 27px; color: rgb(41, 3, 125);"><strong>Notificaciones</strong> </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link {{is_active('/servicios/')}}" href="/servicios/"><strong>Servicios</strong> </a>
+                <a class="nav-link {{is_active('/servicios/')}}" href="/servicios/" style="font-size: 27px; color: rgb(41, 3, 125);"><strong>Servicios</strong> </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link " href="/"><strong>Salir</strong> </a>
+                <a class="nav-link " href="/" style="font-size: 27px; color: rgb(41, 3, 125);"><strong>Salir</strong> </a>
               </li>
             </ul>
           </div>
@@ -63,5 +63,23 @@
       {% endblock %}
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
+    <div class="container">
+        <section class="mis-vis">     
+            <div class="img">
+                <img src="{{url_for('static', filename='imagenes/desayuno-buffet.jpg')}}" alt="equipo1" width="350" height="250">            
+            </div>
+            <div class="img">
+                <img src="{{url_for('static', filename='imagenes/coliflores-asados.jpg')}}" alt="equipo1" width="350" height="250">           
+            </div>
+        </section>
+        <section class="mis-vis">
+            <div class="img">
+                <img src="{{url_for('static', filename='imagenes/carta-terra.jpg')}}" alt="equipo1" width="350" height="250">           
+            </div>
+            <div class="img">
+                <img src="{{url_for('static', filename='imagenes/carta-terra (1).jpg')}}" alt="equipo1" width="350" height="250">           
+            </div>
+        </section>
+    </div>
   </body>
 </html>

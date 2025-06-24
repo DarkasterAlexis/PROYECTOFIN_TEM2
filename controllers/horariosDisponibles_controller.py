@@ -32,28 +32,28 @@ def create():
     
     if request.method == 'POST':
         # Se recuperan los datos del formulario enviado
-        recurso_id = request.form['recurso_id']
-        fecha_str = request.form['fecha']
-        hora_inicio_str = request.form['hora_inicio']
-        hora_fin_str = request.form['hora_fin']
+        id = request.form['id']
+        fecha = request.form['fecha']
+        horaInicio = request.form['horaInicio']
+        horaFin = request.form['horaFin']
         # 'EstaDisponible' es un checkbox, su valor es 'on' si está marcado, si no, no se envía
-        esta_disponible = 'esta_disponible' in request.form 
+        estaDisponible = 'estaDisponible' in request.form 
         notas = request.form.get('notas')
 
         try:
             # Se convierten las cadenas de fecha y hora a objetos date y time
-            fecha_obj = datetime.strptime(fecha_str, '%Y-%m-%d').date()
-            hora_inicio_obj = datetime.strptime(hora_inicio_str, '%H:%M').time()
-            hora_fin_obj = datetime.strptime(hora_fin_str, '%H:%M').time()
+            fecha = datetime.strptime(fecha, '%Y-%m-%d').date()
+            horaInicio_obj = datetime.strptime(horaInicio, '%H:%M').time()
+            horaFin = datetime.strptime(horaFin, '%H:%M').time()
 
             # Se crea una nueva instancia del modelo HorarioDisponible
             horario = HorarioDisponible(
-                RecursoID=recurso_id,
-                Fecha=fecha_obj,
-                HoraInicio=hora_inicio_obj,
-                HoraFin=hora_fin_obj,
-                EstaDisponible=esta_disponible,
-                Notas=notas
+                id=id,
+                fecha=fecha,
+                horaInicio=horaInicio,
+                horaFin=horaFin,
+                estaDisponible=estaDisponible,
+                notas=notas
             )
             # Se guarda el nuevo horario en la base de datos
             horario.save()
@@ -89,27 +89,27 @@ def edit(id):
 
     if request.method == 'POST':
         # Se recuperan los datos actualizados del formulario
-        recurso_id = request.form['recurso_id']
-        fecha_str = request.form['fecha']
-        hora_inicio_str = request.form['hora_inicio']
-        hora_fin_str = request.form['hora_fin']
-        esta_disponible = 'esta_disponible' in request.form
+        id = request.form['id']
+        fecha = request.form['fecha']
+        horaInicio = request.form['horaInicio']
+        horaFin = request.form['horaFin']
+        estaDisponible = 'estaDisponible' in request.form
         notas = request.form.get('notas')
 
         try:
             # Se convierten las cadenas de fecha y hora a objetos date y time
-            fecha_obj = datetime.strptime(fecha_str, '%Y-%m-%d').date()
-            hora_inicio_obj = datetime.strptime(hora_inicio_str, '%H:%M').time()
-            hora_fin_obj = datetime.strptime(hora_fin_str, '%H:%M').time()
+            fecha = datetime.strptime(fecha, '%Y-%m-%d').date()
+            horaInicio = datetime.strptime(horaInicio, '%H:%M').time()
+            horaFin = datetime.strptime(horaFin, '%H:%M').time()
 
             # Se actualizan los atributos del objeto horario
             horario.update(
-                RecursoID=recurso_id,
-                Fecha=fecha_obj,
-                HoraInicio=hora_inicio_obj,
-                HoraFin=hora_fin_obj,
-                EstaDisponible=esta_disponible,
-                Notas=notas
+                id=id,
+                fecha=fecha,
+                horaInicio=horaInicio,
+                horaFin=horaFin,
+                estaDisponible=estaDisponible,
+                notas=notas
             )
             
             # Se redirige a la ruta de índice de horarios disponibles

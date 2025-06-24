@@ -1,23 +1,23 @@
 from database import db
+from flask_login import UserMixin
 
-class Personal(db.Model):
+class Personal(db.Model,UserMixin):
     _tablename_ = "personal"
-
-    PersonalID = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
     Nombre = db.Column(db.String(100), nullable=False)
     Apellido = db.Column(db.String(100), nullable=False)
-    Email = db.Column(db.String(255), nullable=False)
+    email = db.Column(db.String(255), nullable=False)
     Telefono = db.Column(db.String(20), nullable=False)
     password = db.Column(db.String(20),nullable=False)
-    Rol = db.Column(db.String(50), nullable=False)
+    rol = db.Column(db.String(50), nullable=False)
 
-    def _init_(self, Nombre, Apellido, Email, Telefono,password, Rol):
+    def __init__(self, Nombre, Apellido, email, Telefono, password, rol):
         self.Nombre = Nombre
         self.Apellido = Apellido
-        self.Email = Email
+        self.email = email
         self.Telefono = Telefono
         self.password=password
-        self.Rol = Rol
+        self.rol = rol
 
     def save(self):
         db.session.add(self)
@@ -31,14 +31,14 @@ class Personal(db.Model):
     def get_by_id(id):
         return Personal.query.get(id)
 
-    def update(self, Nombre=None, Apellido=None, Email=None, Telefono=None,password=None, Rol=None):
-        if Nombre and Apellido and Email and Telefono and password and Rol:
+    def update(self, Nombre=None, Apellido=None, email=None, Telefono=None,password=None, rol=None):
+        if Nombre and Apellido and email and Telefono and password and rol:
                 self.Nombre = Nombre
                 self.Apellido = Apellido
-                self.Email = Email
+                self.email = email
                 self.Telefono = Telefono
                 self.password = password
-                self.Rol = Rol
+                self.rol = rol
         db.session.commit()
 
     def delete(self):

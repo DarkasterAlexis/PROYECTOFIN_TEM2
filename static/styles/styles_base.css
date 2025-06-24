@@ -36,10 +36,49 @@ nav ul li a{
     border-radius: 1px;
     font-size: 30px;
     font-weight: bold;
+    font-family: 'Bernard MT Condensed', sans-serif;
     transition: background-color 0.3s ease;
     text-shadow: 9px 15px 10px rgba(255, 255, 0, 1), 0px 0px 10px rgba(255, 140, 0, 0.8);
 }
 
 nav ul li a:hover{
     text-shadow: 0px 0px 15px rgba(255, 255, 0, 1), 0px 0px 30px rgba(255, 255, 0, 0.8);
+}
+
+body nav div div ul li a{
+  color: chartreuse;
+}
+
+.container{
+    max-width: 2000px;
+    margin-top: 0;
+    padding-top: 1px;
+}
+
+.mis-vis{
+    max-width: 1700px;
+    margin: 0px auto;
+    display: flex;
+    justify-content: space-between; /* espaciado entre .mis y .vis */
+    gap: 20px; /* espacio entre ambos */
+    padding: 20px;
+    margin-top: 0;
+}
+
+.img{
+    max-width: 720px;
+    margin: 0px auto;
+    padding: 20px 90px;
+    background: rgba(44, 251, 3, 0.316);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    margin-bottom: 40px;
+    margin-top: 0;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.img:hover{
+    box-shadow: 20px 20px 10px rgba(0, 0, 0, 0.735);
+    transform: scale(1.07);
 }

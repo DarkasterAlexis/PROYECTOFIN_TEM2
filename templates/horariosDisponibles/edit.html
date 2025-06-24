@@ -1,0 +1,39 @@
+<!-- templates/horarios/create.html -->
+{% extends 'base.html' %}
+{% block title %}Registrar Horario Disponible{% endblock %}
+
+{% block content %}
+<h2>Actualizar Horario Disponible</h2>
+<form action="{{ url_for('horario.edit') }}" method="POST">
+    <div class="text-center">
+        <label for="rec" class="form-label">Recurso ID:</label>
+        <input type="number" name="id" id="rec" class="form-control" value="{{ horario.id }}" required><br>
+    </div>
+    <div class="text-center">
+        <label for="fe" class="form-label">Fecha:</label>
+        <input type="date" name="fecha" id="fe" class="form-control" value="{{ horario.fecha }}" required><br>
+    </div>
+    <div class="text-center">
+        <label for="ini" class="form-label">Hora Inicio:</label>
+        <input type="time" name="horaInicio" id="ini" class="form-control" value="{{ horario.horaInicio }}" required><br>
+    </div>
+    <div class="text-center">
+        <label for="horpre" class="form-label">Hora Fin:</label>
+        <input type="time" name="horaFin" id="horpre" class="form-control" value="{{ horario.horaFin }}" required><br>
+    </div>
+    <div class="text-center">
+        <label for="pre" class="form-label">¿Está Disponible?</label>
+        <select name="estaDisponible" id="pre" class="form-control">
+          <option value="true" {% if horario.estadodisponible %}selected{% endif %}>Sí</option>
+          <option value="false"  {% if not horario.estadodisponible %}selected{% endif %}>No</option>
+        </select><br>
+    </div>
+    <div class="text-center">
+        <label for="not" class="form-label">Notas:</label>
+        <textarea name="notas" id="not" class="form-control">{{ horario.notas }}</textarea><br>
+    </div>
+    <div class="text-center">
+        <button type="submit" class="btn btn-primary">Actualizar</button>
+    </div>
+</form>
+{% endblock %}

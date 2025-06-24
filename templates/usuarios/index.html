@@ -11,7 +11,6 @@
       <th>Apellido</th>
       <th>Email</th>
       <th>Telefono</th>
-      <th>Contraseña</th>
       <th>ID Tipo de Usuario</th>
       <th>Tipo de Relacion</th>
       <th>Rol</th>
@@ -21,21 +20,20 @@
   <tbody>
     {% for u in usuarios %}
     <tr>
-      <td>{{ u.id }}</td>
-      <td>{{ u.Nombre }}</td>
-      <td>{{ u.Apellido }}</td>
-      <td>{{ u.Email }}</td>
-      <td>{{ u.Telefono }}</td>
-      <td>{{ u.password }}</td>
-      <td>{{ u.idtipouser }}</td>
-      <td>{{ u.tiprelacion }}</td>
-      <td>{{ u.rol }}</td>
-      <td>
-                <a href="{{ url_for('usuario.delete', id=s.id) }}" class="btn btn-danger btn-sm">Eliminar</a>
-            </td>
+        <td>{{ u.id }}</td>
+        <td>{{ u.Nombre }}</td>
+        <td>{{ u.Apellido }}</td>
+        <td>{{ u.email }}</td>
+        <td>{{ u.Telefono }}</td>
+        <td>{{ u.idtipouser }}</td>
+        <td>{{ u.tiprelacion }}</td>
+        <td>{{ u.rol }}</td>
+        <td>
+            <a href="{{ url_for('usuario.delete', id=u.id) }}" class="btn btn-danger btn-sm">Eliminar</a>
+        </td>
     </tr>
     {%else%}
-        <tr><td colspan="10" class="text-center">⚠️ No hay usuarios registrados.</td></tr>
+        <tr><td colspan="9" class="text-center">⚠️ No hay usuarios registrados.</td></tr>
     {% endfor %}
   </tbody>
 </table>

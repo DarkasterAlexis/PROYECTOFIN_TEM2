@@ -14,7 +14,7 @@ def index():
 @reserva_bp.route('/create', methods=['GET', 'POST'])
 def create():
     if request.method == 'POST':
-        ClienteID = request.form['ClienteID']
+        id = request.form['id']
         RecursoID = request.form['RecursoID']
         FechaReserva = request.form['FechaReserva']
         HoraInicio = request.form['HoraInicio']
@@ -25,7 +25,7 @@ def create():
         FechaCreacion = request.form.get('FechaCreacion')
         NotasCliente = request.form.get('NotasCliente')
 
-        reserva = Reserva(ClienteID, RecursoID, FechaReserva, HoraInicio, HoraFin,
+        reserva = Reserva(id, RecursoID, FechaReserva, HoraInicio, HoraFin,
                           NumeroPersonas, TipoCita, EstadoReserva, FechaCreacion, NotasCliente)
         reserva.save()
         return redirect(url_for('reserva.index'))
@@ -37,7 +37,7 @@ def edit(id):
     if request.method == 'POST':
         cambios= []
         campos_for={
-            "ClienteID" : request.form['ClienteID'],
+            "id" : request.form['id'],
             "RecursoID" : request.form['RecursoID'],
             "FechaReserva" : request.form['FechaReserva'],
             "HoraInicio" : request.form['HoraInicio'],
